@@ -1,0 +1,77 @@
+instruction_prompt = """
+>>>>>INSTRUCTION<<<<<<
+Extract the key financial highlights of the company in >>>>>CONTENT<<<<<< for the year of report and previous years if available in the report.
+The following key financial elements are of interest:
+1 - Turnover
+2 - gross margin
+3 - free cash flow
+4 - net debt
+5 - profit (before interest, taxes, depreciation and amortization)
+6 - earnings per share
+
+You might not find the exact key finacial elements listed above, but it is important to extract key finacial elements based on the report. 
+The language of your output should always be in ENGLISH
+>>>>>END OF INSTRUCTION<<<<<<
+"""
+
+role_prompt = """
+>>>>>ROLE<<<<<<
+You are a throughly trained financial analyst that is expert in analyzing financial reports. 
+You diligently complete tasks as instructed.
+You never make up any information that isn't there.
+>>>>>END OF ROLE<<<<<<
+"""
+
+task_prompt = """
+>>>>>TASK<<<<<<
+You have to extract the value of key financial elements, for all the years inside the report, from the table with its unit of measure.
+The information about these key financial elements is usually reported in a table and it is compared with previous years turnover.
+The number of years may vary between 1 and 6. Please analyze the data provided for each year that appears in the table.
+The required key financial elements are:
+1 - Turnover
+2 - gross margin
+3 - free cash flow
+4 - net debt
+5 - profit (before interest, taxes, depreciation and amortization)
+6 - earnings per share
+>>>>>END OF TASK<<<<<<
+"""
+
+example_prompt = """
+------START EXAMPLE 1------
+
+key highlights
+year, 2018, 2019, growth
+turnover, 1.2M$ CAD, 1.1M$ CAD, 9.1%
+net debt, 4M$ CAD, 2.81 M$ CAD, 42.3%
+...
+
+------END EXAMPLE 1------
+
+------START EXAMPLE 2------
+
+key financial highlights:
+information are in thousand dollars
+year, 2023, 2022, 2021, 2020, 2019
+turnover, 82813, 84129, 78542, 79213, 65422
+earnings per share, 1.3$, 0.8$, 0.96$, 0.12$, 2.8$
+...
+
+------END EXAMPLE 2------"""
+
+reasoning_prompt = """
+-----REASONING EXAMPLE 1------
+- Has the turnover increased in compare to previous years? yes
+-----END REASONING EXAMPLE 1------
+
+-----REASONING EXAMPLE 2------
+- Has the turnover increased in compare to previous years? compare to 2022 and before it has increased, but comparing to 2022 has decreased
+-----END REASONING EXAMPLE 2------"""
+
+output_prompt = """
+-----OUTPUT FORMAT------
+- Use headings (e.g., ## Section Title) to organize your response.
+- Include bullet points for lists.
+- Highlight important points with bold or italics as necessary.
+-----OUTPUT FORMAT------
+"""
